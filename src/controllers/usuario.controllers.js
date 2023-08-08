@@ -30,20 +30,16 @@ export async function loginUser(req, res){
     const {email, senha} = req.body
 
     try {
-        console.log("oi")
 
         const verificadorLogin = await db.query(`SELECT * FROM usuario WHERE email = $1`, [email])
-        console.log("oi44",verificadorLogin)
 
 
         if (verificadorLogin.rowCount === 0) {
             return res.sendStatus(401);
         }
-        console.log("oi55",verificadorLogin)
 
 
         const user = verificadorLogin.rows[0];
-        console.log("oi33",user)
 
 
         const senhaCorreta = await bcrypt.compare(senha, user.senha);
