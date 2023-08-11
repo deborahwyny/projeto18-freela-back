@@ -26,6 +26,8 @@ export async function postpets(req, res) {
         if (userInfo.rows.length === 0) {return res.status(401).send('Usuário não encontrado')}
         console.log('userInfo',userInfo)
 
+        const postCats = await db.query('INSERT INTO pets (caracteristica, nome_tutor, nome_gatinho, telefone_contato) VALUES ($1, $2, $3, $4);', [caracteristica, nome_tutor, nome_gatinho, telefone_contato ])
+
 
         res.sendStatus(200)
 
@@ -37,3 +39,16 @@ export async function postpets(req, res) {
     }
 }
 
+export async function getPets(req, res){
+
+    try {
+
+        const getPet = await db.query('SELECT * FROM pets;')
+        console.log("oi", getPet)
+        res.send(getPet.rows)
+
+
+    } catch(err){
+        res.status(500).send(err.message)
+    }
+}
