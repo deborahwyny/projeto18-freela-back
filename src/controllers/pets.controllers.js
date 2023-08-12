@@ -4,7 +4,7 @@ import { db } from "../database/database.connection.js"
 
 export async function postpets(req, res) {
 
-    const {caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url } = req.body
+    const {caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url, valor } = req.body
 
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
@@ -24,7 +24,7 @@ export async function postpets(req, res) {
         if (userInfo.rows.length === 0) {return res.status(401).send('Usuário não encontrado')}
         console.log('userInfo',userInfo)
 
-        const postCats = await db.query('INSERT INTO pets (caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url) VALUES ($1, $2, $3, $4, $5, $6);', [caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url ])
+        const postCats = await db.query('INSERT INTO pets (caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url, valor) VALUES ($1, $2, $3, $4, $5, $6, $7);', [caracteristica, nome_tutor, nome_gatinho, telefone_contato, disponivel, url, valor ])
 
         res.sendStatus(200)
 

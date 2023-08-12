@@ -6,6 +6,7 @@ export const petsSchema = Joi.object({
     nome_gatinho: Joi.string().required().trim(), 
     telefone_contato: Joi.string().required().trim(),
     disponivel: Joi.boolean().required(),
-    url: Joi.string().required().trim(), 
+    url: Joi.string().required().trim(),
+    valor: Joi.number().integer().required()
 
 });
